@@ -13,8 +13,8 @@ echo 'LEMP stack installed'
 echo 'Configure LEMP settings'
 # Overwrite php conf files with the copies in this project. This will make 
 # php config easy to edit.
-# cp /vagrant/provision/config/php.ini /etc/php5/fpm/php.ini
-# cp /vagrant/provision/config/www.conf /etc/php5/fpm/pool.d/www.conf
+cp /vagrant/provision/config/php.ini /etc/php5/fpm/php.ini
+cp /vagrant/provision/config/www.conf /etc/php5/fpm/pool.d/www.conf
 echo 'LEMP settings configured'
 
 echo 'Create virtual host for thesauce'
