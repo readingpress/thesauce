@@ -4,7 +4,7 @@
 		<title>The Sauce</title>
 	</head>
 	<body>
-		<h1>Welcome to the sauce</h1>
-		<p>The sauce is a fully configured vagrant-based LEMP stack (Linux, nginx, MySQL, PHP) ready for your use.</p>
+		<h1>Welcome to The Sauce</h1>
+		<p>The Sauce is a fully configured vagrant-based LEMP kitchen (Linux, nginx, MySQL, PHP) ready for you to cook.</p>
 	</body>
 </html>
