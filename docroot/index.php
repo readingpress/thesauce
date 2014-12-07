@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>The Sauce</title>
-	</head>
-	<body>
-		<h1>Welcome to The Sauce</h1>
-		<p>The Sauce is a fully configured vagrant-based LEMP kitchen (Linux, nginx, MySQL, PHP) ready for you to cook.</p>
-	</body>
-</html>
+<?php
+/**
+ *	@file
+ *	Handles all incoming http requests that are not for a file in a public 
+ *	directory.
+ */
+
+
+/**
+ * Root directory of the application.
+ */
+define('APP_ROOT', getcwd());
+
+require_once APP_ROOT . '/application/bootstrap.php';
