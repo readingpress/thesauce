@@ -33,7 +33,7 @@ echo 'Virtual host created for thesauce'
 
 echo 'Restart services'
 # We need to restart our services to activate the new configuration.
-sudo service php5-fpm restart
+service php5-fpm restart
 service nginx restart
 echo 'Services restarted'
 
