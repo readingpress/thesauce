@@ -8,11 +8,14 @@ apt-get update
 # require user input.
 export DEBIAN_FRONTEND=noninteractive
 apt-get install mysql-server nginx php5-fpm -y
-# PHP extensions
+# Install PHP extensions.
 apt-get install php5-mysql -y
 echo 'LEMP stack installed'
 
 echo 'Configure LEMP settings'
+# We need to make a directory for the php5-fpm socket. Otherwise it cannot
+# create the directory itself which causes a server crash.
+mkdir /var/run/php5-fpm
 # Overwrite php conf files with the copies in this project. This will make 
 # php config easy to edit.
 cp /vagrant/provision/config/php.ini /etc/php5/fpm/php.ini
