@@ -5,6 +5,6 @@
 	</head>
 	<body>
 		<h1>Welcome to the sauce</h1>
-		<p>The sauce is a fully configured vagrant-based LEMP (Linux, nginx, MySQL, PHP) stack ready for your use.</p>
+		<p>The sauce is a fully configured vagrant-based LEMP stack (Linux, nginx, MySQL, PHP) ready for your use.</p>
 	</body>
 </html>
