@@ -9,8 +9,4 @@
  */
 class CreateDBQuery extends Query {
 
-	public function __construct($db_connection)	{
-		parent::__construct($db_connection, "CREATE DATABASE %s");
-	}
-
 }
