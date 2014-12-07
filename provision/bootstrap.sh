@@ -14,7 +14,7 @@ echo 'LEMP stack installed'
 
 echo 'Configure LEMP settings'
 # We need to make a directory for the php5-fpm socket. Otherwise it cannot
-# create the directory itself which causes a server crash.
+# create the directory itself which leads to a server crash.
 mkdir /var/run/php5-fpm
 # Overwrite php conf files with the copies in this project. This will make 
 # php config easy to edit.
