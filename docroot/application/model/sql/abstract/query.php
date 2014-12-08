@@ -18,13 +18,15 @@ abstract class Query {
 
 	/**
 	 *	@var string $type
-	 *		What to operate on. This doesn't apply to all queries. Examples include DATABASE or TABLE.
+	 *		What to operate on. This doesn't apply to all queries. Examples include 
+	 *		DATABASE or TABLE.
 	 */
 	public $type;
 
 	/**
 	 *	@var string $name
-	 *		A generic name for what is being created, dumped, inserted, selected, updated, or deleted.
+	 *		A generic name for what is being created, dumped, inserted, selected, 
+	 *		updated, or deleted.
 	 */
 	public $name;
 
