@@ -6,6 +6,11 @@
 
 /**
  *	A SELECT query.
+ *
+ *	@param string $name
+ *		The name of the table to start the select statement with.
+ *	@param string $alias
+ *		A string alias to reference the table given in the first parameter.
  */
 class SelectQuery extends Query {
 
@@ -21,8 +26,10 @@ class SelectQuery extends Query {
 	 */
 	protected $alias;
 
-	public function __construct()	{
+	public function __construct($name, $alias)	{
+		parent::__construct(NULL, $name);
 		$this->operation = 'SELECT %fields FROM %name AS %alias';
+		$this->alias = $alias;
 	}
 
 	/**

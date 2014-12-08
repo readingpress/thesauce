@@ -9,7 +9,8 @@
  */
 class UseQuery extends Query {
 
-	public function __construct()	{
+	public function __construct($name)	{
+		parent::__construct(NULL, $name);
 		$this->operation = 'USE %name';
 	}
 

@@ -30,6 +30,12 @@ abstract class Query {
 	 */
 	protected $name;
 
+	public function __construct($type = NULL, $name = NULL)	{
+		$this->operation = NULL;
+		$this->type = $type;
+		$this->name = $name;
+	}
+
 	/**
 	 *	Build the query by calling all defined replacement methods.
 	 */

@@ -16,7 +16,8 @@ class CreateQuery extends Query {
 	 */
 	protected $columns;
 
-	public function __construct()	{
+	public function __construct($type, $name)	{
+		parent::__construct($type, $name);
 		$this->operation = 'CREATE %type %name %columns';
 		$this->columns = array();
 	}
