@@ -32,7 +32,7 @@ class InsertQuery extends Query {
 	 */
 	public function values($values)	{
 		parent::values($values);
-		$keys = array_keys($values);
+		$this->keys = array_keys($values);
 	}
 
 }

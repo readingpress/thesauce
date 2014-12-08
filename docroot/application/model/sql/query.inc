@@ -64,7 +64,9 @@ abstract class Query {
 	 *		An array of key => value pairs to insert.
 	 */
 	public function values($values)	{
-		$this->values += $values;
+		foreach ($values as $key => $value) {
+			$this->values[$key] = "'$value'";
+		}
 	}
 
 	/**
@@ -82,7 +84,7 @@ abstract class Query {
 		// We call end() on $placeholders because this gives us the part of our
 		// regex that is in the parenthesis, i.e. without the leading colon.
 		foreach (end($placeholders) as $ph) {
-			$str = preg_replace("/:$ph/", implode(', ', $this->{$ph}),$str);
+			$str = preg_replace("/:$ph/", implode(', ', $this->{$ph}), $str);
 		}
 		return $str;
 	}

@@ -26,7 +26,7 @@ class UpdateQuery extends Query {
 	 */
 	public function values($values)	{
 		foreach ($values as $key => $value) {
-			$this->values[] = "$key = $value";
+			$this->values[] = "$key = '$value'";
 		}
 	}
 
