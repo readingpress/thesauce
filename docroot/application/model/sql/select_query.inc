@@ -26,12 +26,6 @@ class SelectQuery extends Query {
 	 */
 	protected $joins;
 
-	/**
-	 *	@var array $conditions
-	 *		An array of conditions to apply to the query.
-	 */
-	protected $conditions;
-
 	public function __construct($target, $alias)	{
 		parent::__construct($target);
 		$this->stringBase = "SELECT :fields FROM $target AS $alias :joins :conditions";
@@ -73,20 +67,6 @@ class SelectQuery extends Query {
 	 */
 	public function join($name, $alias, $condition)	{
 		$this->joins[] = "INNER JOIN $name AS $alias ON $condition";
-	}
-
-	/**
-	 *	Add a condition to the query.
-	 *
-	 *	@param string $a
-	 *		The first value.
-	 *	@param string $b
-	 *		The second value.
-	 *	@param string $operator
-	 *		A comparison operator.
-	 */
-	public function condition($a, $b, $operator)	{
-		$this->conditions[] = "WHERE $a $operator '$b'";
 	}
 
 }

@@ -1,20 +1,20 @@
 <?php
 /**
  *	@file
- *	The InsertQuery class.
+ *	The UpdateQuery class.
  */
 
 /**
- *	An INSERT query.
+ *	An Update query.
  *
  *	@param string $target
  *		The table to select.
  */
-class InsertQuery extends Query {
+class UpdateQuery extends Query {
 
 	public function __construct($target)	{
 		parent::__construct($target);
-		$this->stringBase = "INSERT INTO $target (:keys) VALUES (:values)";
+		$this->stringBase = "UPDATE $target SET :values :condition";
 	}
 
 }

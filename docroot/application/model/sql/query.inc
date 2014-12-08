@@ -26,14 +26,38 @@ abstract class Query {
 	 */
 	protected $target;
 
+	/**
+	 *	@var array $conditions
+	 *		An array of conditions to apply to the query.
+	 */
+	protected $conditions;
+
 	public function __construct($target)	{
 		$this->target = $target;
 	}
 
+
 	/**
-	 *	Build the query string.
+	 *	Add a condition to the query.
+	 *
+	 *	@param string $a
+	 *		The first value.
+	 *	@param string $b
+	 *		The second value.
+	 *	@param string $operator
+	 *		A comparison operator.
 	 */
-	public function queryString()	{
+	public function condition($a, $b, $operator)	{
+		$this->conditions[] = "WHERE $a $operator '$b'";
+	}
+
+	/**
+	 *	Return the query as a string.
+	 *
+	 *	@return string
+	 *		The query string.
+	 */
+	public function toString()	{
 		$str = $this->stringBase;
 		// Placeholders are always a string of alphanumeric characters and 
 		// underscores that ends in a space and begins with a colon (e.x. ':type').
