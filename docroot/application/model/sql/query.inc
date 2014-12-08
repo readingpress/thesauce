@@ -13,14 +13,14 @@
 abstract class Query {
 
 	/**
-	 *	@var string $queryStringBase.
+	 *	@var string $stringBase.
 	 *		The beginning of the query string, with named placeholders for the
 	 *		dynamic values.
 	 */
-	protected $stringBase;
+	protected $stringBase = '';
 
 	/**
-	 *	@var string $queryTarget
+	 *	@var string $target
 	 *		The name of the table or database on which the operation is being 
 	 *		performed.
 	 */
@@ -30,7 +30,13 @@ abstract class Query {
 	 *	@var array $conditions
 	 *		An array of conditions to apply to the query.
 	 */
-	protected $conditions;
+	protected $conditions = array();
+
+	/**
+	 *	@param array $values
+	 *		An array of key => value pairs to insert or update.
+	 */
+	protected $values = array();
 
 	public function __construct($target)	{
 		$this->target = $target;
@@ -49,6 +55,16 @@ abstract class Query {
 	 */
 	public function condition($a, $b, $operator)	{
 		$this->conditions[] = "WHERE $a $operator '$b'";
+	}
+
+	/**
+	 *	Add values to to insert or update.
+	 *
+	 *	@param array $values;
+	 *		An array of key => value pairs to insert.
+	 */
+	public function values($values)	{
+		$this->values += $values;
 	}
 
 	/**
