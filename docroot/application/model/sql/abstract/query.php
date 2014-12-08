@@ -6,47 +6,45 @@
 
 /**
  *	The abstract query object.
+ *
+ *	@param string $target
+ *		The name of the item that is the target of the query.
  */
 abstract class Query {
 
 	/**
-	 *	@var string $operation.
-	 *		The operation to be performed. This amounts to the beginning of the
-	 *		final query and may named placeholders.
+	 *	@var string $queryStringBase.
+	 *		The beginning of the query string, with named placeholders for the
+	 *		dynamic values.
 	 */
-	protected $operation;
+	protected $stringBase;
 
 	/**
-	 *	@var string $type
-	 *		What to operate on. This doesn't apply to all queries. Examples include 
-	 *		DATABASE or TABLE.
+	 *	@var string $queryTarget
+	 *		The name of the table or database on which the operation is being 
+	 *		performed.
 	 */
-	protected $type;
+	protected $target;
 
-	/**
-	 *	@var string $name
-	 *		A generic name for what is being created, dumped, inserted, selected, 
-	 *		updated, or deleted.
-	 */
-	protected $name;
-
-	public function __construct($type = NULL, $name = NULL)	{
-		$this->operation = NULL;
-		$this->type = $type;
-		$this->name = $name;
+	public function __construct($target)	{
+		$this->target = $target;
 	}
 
 	/**
-	 *	Build the query by calling all defined replacement methods.
+	 *	Build the query string.
 	 */
-	public function buildQuery()	{
-		$query = $this->operation;
-		preg_match_all('/%([[:alnum:]_]+)/', $query, $replacements, PREG_SET_ORDER);
-		foreach ($replacements as $replace) {
-			$replacement = method_exists($this, "$replace[1]ToQueryString") ? $this->{"$replace[1]ToQueryString"}() : $this->{$replace[1]};
-			$query = preg_replace("/$replace[0]/", $replacement, $query);
+	public function queryString()	{
+		$str = $this->stringBase;
+		// Placeholders are always a string of alphanumeric characters and 
+		// underscores that ends in a space and begins with a colon (e.x. ':type').
+		$regex = '/:([[:alnum:]_]+)/';
+		preg_match_all($regex, $str, $placeholders);
+		// We call end() on $placeholders because this gives us the part of our
+		// regex that is in the parenthesis, i.e. without the leading colon.
+		foreach (end($placeholders) as $ph) {
+			$str = preg_replace("/:$ph/", $this->{"{$ph}ToString"}(),$str);
 		}
-		return $query;
+		return $str;
 	}
 
 }

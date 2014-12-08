@@ -7,66 +7,53 @@
 /**
  *	A SELECT query.
  *
- *	@param string $name
- *		The name of the table to start the select statement with.
+ *	@param string $target
+ *		The table to select.
  *	@param string $alias
- *		A string alias to reference the table given in the first parameter.
+ *		An alias to give to $target.
  */
 class SelectQuery extends Query {
 
 	/**
 	 *	@var array $fields
-	 *		An array field arrays keyed by table alias.
+	 *		An array of fields to select.
 	 */
-	protected $fields;
+	private $fields;
 
-	/**
-	 *	@var string $alias
-	 *		A string to use as table alias.
-	 */
-	protected $alias;
-
-	public function __construct($name, $alias)	{
-		parent::__construct(NULL, $name);
-		$this->operation = 'SELECT %fields FROM %name AS %alias';
-		$this->alias = $alias;
+	public function __construct($target, $alias)	{
+		parent::__construct($target);
+		$this->stringBase = "SELECT :fields FROM $target AS $alias";
 	}
 
 	/**
-	 *	Make this query a count query.
+	 *	Make the query a count query.
 	 */
 	public function count()	{
-		$this->operation = preg_replace('/%fields/', 'count(*)', $this->operation);
+		$this->stringBase = preg_replace('/%fields/', 'count(*)', $this->operation);
 	}
 
 	/**
-	 *	Returns columns as a string, in a form suitable to be placed in a query.
+	 *	Add fields to the query.
+	 *
+	 *	@param string $alias
+	 *		The alias of the table.
+	 *	@param array $fields
+	 *		The fields to select.
+	 */
+	public function fields($alias, $fields = array())	{
+		foreach ($fields as $name) {
+			$this->fields[] = "$alias.$name";
+		}
+	}
+
+	/**
+	 *	Returns $fields as a query string parameter.
 	 *
 	 *	@return string
 	 *		The columns in a form suitable to be placed in a query.
 	 */
-	protected function fieldsToQueryString()	{
-		$fieldlist = array();
-		foreach ($this->fields as $key => $value) {
-			$fieldlist += $this->applyTablePrefix($key, $value);	
-		}
-		return implode(', ', $fieldlist);
-	}
-
-	/**
-	 *	Helper function to add table prefixes to a field array. This function
-	 *	returns the modified array.
-	 *
-	 *	@param string $prefix
-	 *		The prefix to apply.
-	 *	@param array $fieldnames
-	 *		An array of fieldnames.
-	 */
-	private function applyTablePrefix($prefix, $fieldnames)	{
-		foreach ($fieldnames as $key => &$value) {
-			$value = "$prefix.$value";
-		}
-		return $fieldnames;
+	protected function fieldsToString()	{
+		return implode(', ', $this->fields);
 	}
 
 }

@@ -5,9 +5,15 @@
  */
 
 /**
- *	A CREATE query.
+ *	An admin query. Can be used to create and drop tables or databases, set 
+ *	database etc.
+ *
+ *	@param string $target
+ *		The name of the table or database to operate on.
+ *	@param string $op
+ *		The command to run on the target (e.x. 'CREATE DATABASE', 'DROP TABLE').
  */
-class CreateQuery extends Query {
+class AdminQuery extends Query {
 
 	/**
 	 *	@var array $columns
@@ -16,9 +22,9 @@ class CreateQuery extends Query {
 	 */
 	protected $columns;
 
-	public function __construct($type, $name)	{
-		parent::__construct($type, $name);
-		$this->operation = 'CREATE %type %name %columns';
+	public function __construct($target, $op)	{
+		parent::__construct($target);
+		$this->stringBase = "$op $target :columns";
 		$this->columns = array();
 	}
 
@@ -29,14 +35,11 @@ class CreateQuery extends Query {
 	 *		The columns in a form suitable to be placed in a query.
 	 */
 	protected function columnsToQueryString()	{
-		if (empty($this->columns)) {
-			return NULL;
-		}
 		$cols = array();
 		foreach ($this->columns as $key => $value) {
 			$cols[] = $key . ' ' . $value;
 		}
 		return '(' . implode(', ', $cols) . ')';
 	}
-
+		
 }
