@@ -5,6 +5,6 @@
  */
 
 // Load dependencies.
-require_once APP_ROOT . '/application/model/sql/abstract/query.php';
-require_once APP_ROOT . '/application/model/sql/create_query.php';
+require_once APP_ROOT . '/application/model/sql/query.php';
+require_once APP_ROOT . '/application/model/sql/db_admin.php';
 require_once APP_ROOT . '/application/model/sql/select_query.php';
