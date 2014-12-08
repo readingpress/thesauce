@@ -17,14 +17,14 @@ abstract class Query {
 	 *		The beginning of the query string, with named placeholders for the
 	 *		dynamic values.
 	 */
-	protected $stringBase = '';
+	protected $stringBase = NULL;
 
 	/**
 	 *	@var string $target
 	 *		The name of the table or database on which the operation is being 
 	 *		performed.
 	 */
-	protected $target;
+	protected $target = NULL;
 
 	/**
 	 *	@var array $conditions
