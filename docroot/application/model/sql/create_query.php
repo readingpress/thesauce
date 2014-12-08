@@ -14,7 +14,7 @@ class CreateQuery extends Query {
 	 *		An array of column data. Each of the items in this array takes the form
 	 *		'column_name' => 'column_type'.
 	 */
-	public $columns;
+	protected $columns;
 
 	public function __construct()	{
 		$this->operation = 'CREATE %type %name %columns';
@@ -27,7 +27,7 @@ class CreateQuery extends Query {
 	 *	@return string
 	 *		The columns in a form suitable to be placed in a query.
 	 */
-	public function columnsToQueryString()	{
+	protected function columnsToQueryString()	{
 		if (empty($this->columns)) {
 			return NULL;
 		}

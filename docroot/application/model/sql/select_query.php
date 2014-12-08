@@ -13,13 +13,13 @@ class SelectQuery extends Query {
 	 *	@var array $fields
 	 *		An array field arrays keyed by table alias.
 	 */
-	public $fields;
+	protected $fields;
 
 	/**
 	 *	@var string $alias
 	 *		A string to use as table alias.
 	 */
-	public $alias;
+	protected $alias;
 
 	public function __construct()	{
 		$this->operation = 'SELECT %fields FROM %name AS %alias';

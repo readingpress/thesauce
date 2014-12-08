@@ -21,14 +21,14 @@ abstract class Query {
 	 *		What to operate on. This doesn't apply to all queries. Examples include 
 	 *		DATABASE or TABLE.
 	 */
-	public $type;
+	protected $type;
 
 	/**
 	 *	@var string $name
 	 *		A generic name for what is being created, dumped, inserted, selected, 
 	 *		updated, or deleted.
 	 */
-	public $name;
+	protected $name;
 
 	/**
 	 *	Build the query by calling all defined replacement methods.
