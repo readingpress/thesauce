@@ -26,6 +26,13 @@ class SelectQuery extends Query {
 	}
 
 	/**
+	 *	Make this query a count query.
+	 */
+	public function count()	{
+		$this->operation = preg_replace('/%fields/', 'count(*)', $this->operation);
+	}
+
+	/**
 	 *	Returns columns as a string, in a form suitable to be placed in a query.
 	 *
 	 *	@return string
