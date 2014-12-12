@@ -52,7 +52,7 @@ abstract class Query {
 
 	public function __construct($target)	{
 		$this->target = $target;
-		$this->stringBase = NULL;
+		$this->stringBase = '';
 		$this->fields = array();
 		$this->values = array();
 		$this->conditions = array();
