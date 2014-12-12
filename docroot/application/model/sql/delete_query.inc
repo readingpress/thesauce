@@ -15,6 +15,7 @@ class DeleteQuery extends Query {
 	public function __construct($target)	{
 		parent::__construct($target);
 		$this->stringBase = "DELETE FROM $target :conditions";
+		$this->prepare("DELETE FROM $target :conditions");
 	}
 
 }

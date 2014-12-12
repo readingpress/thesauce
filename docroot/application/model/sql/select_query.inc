@@ -29,6 +29,7 @@ class SelectQuery extends Query {
 	public function __construct($target, $alias)	{
 		parent::__construct($target);
 		$this->stringBase = "SELECT :fields FROM $target AS $alias :joins :conditions";
+		$this->prepare("SELECT :fields FROM $target AS $alias :joins :conditions");
 	}
 
 	/**

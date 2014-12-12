@@ -33,6 +33,12 @@ abstract class Query {
 	protected $conditions = array();
 
 	/**
+	 *	@var array $params
+	 *		The parameters to pass to the query using mysqli_stmt::bind_param().
+	 */
+	protected $params = array();
+
+	/**
 	 *	@param array $values
 	 *		An array of key => value pairs to insert or update.
 	 */
@@ -54,7 +60,8 @@ abstract class Query {
 	 *		A comparison operator.
 	 */
 	public function condition($a, $b, $operator)	{
-		$this->conditions[] = "WHERE $a $operator '$b'";
+		$this->conditions[] = "WHERE $a $operator ?";
+		$params[] = $b;
 	}
 
 	/**
@@ -64,9 +71,7 @@ abstract class Query {
 	 *		An array of key => value pairs to insert.
 	 */
 	public function values($values)	{
-		foreach ($values as $key => $value) {
-			$this->values[$key] = "'$value'";
-		}
+		$this->params += $values;
 	}
 
 	/**

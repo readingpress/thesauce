@@ -33,6 +33,10 @@ class InsertQuery extends Query {
 	public function values($values)	{
 		parent::values($values);
 		$this->keys = array_keys($values);
+		// We need to build an array of placeholder question marks matching in 
+		// length with our column names ($keys). That way we can replace them later
+		// with mysqli_stmt::bind_param().
+		$this->values = array_fill(0, count($this->keys), '?');
 	}
 
 }

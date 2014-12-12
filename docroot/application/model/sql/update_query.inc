@@ -25,8 +25,9 @@ class UpdateQuery extends Query {
 	 *		An array of key => value pairs to insert.
 	 */
 	public function values($values)	{
+		parent::values($values);
 		foreach ($values as $key => $value) {
-			$this->values[] = "$key = '$value'";
+			$this->values[] = "$key = ?";
 		}
 	}
 
