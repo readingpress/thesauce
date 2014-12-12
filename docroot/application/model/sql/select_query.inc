@@ -18,12 +18,12 @@ class SelectQuery extends Query {
 	 *	@var array $joins
 	 *		An array of joins to apply to the query.
 	 */
-	protected $joins = array();
+	protected $joins;
 
 	public function __construct($target, $alias)	{
 		parent::__construct($target);
 		$this->stringBase = "SELECT :fields FROM $target AS $alias :joins :conditions";
-		$this->prepare("SELECT :fields FROM $target AS $alias :joins :conditions");
+		$this->joins = array();
 	}
 
 	/**
