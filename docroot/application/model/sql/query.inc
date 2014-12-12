@@ -81,7 +81,7 @@ abstract class Query {
 	 *	@param array $values;
 	 *		An array of key => value pairs to insert.
 	 */
-	public function valueMap($values)	{
+	public function valueMap(array $values)	{
 		$this->params += $values;
 	}
 

@@ -24,7 +24,7 @@ class InsertQuery extends Query {
 	 *	@param array $values;
 	 *		An array of key => value pairs to insert.
 	 */
-	public function valueMap($values)	{
+	public function valueMap(array $values)	{
 		parent::valueMap($values);
 		$this->fields = array_keys($values);
 		// We need to build an array of placeholder question marks matching in 

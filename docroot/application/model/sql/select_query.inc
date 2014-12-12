@@ -41,7 +41,7 @@ class SelectQuery extends Query {
 	 *	@param array $fields
 	 *		The fields to select.
 	 */
-	public function addFields($alias, $fields = array('*'))	{
+	public function addFields($alias, array $fields = array('*'))	{
 		foreach ($fields as $name) {
 			$this->fields[] = "$alias.$name";
 		}
@@ -54,8 +54,8 @@ class SelectQuery extends Query {
 	 *		The name of the table to join on.
 	 *	@param string $alias
 	 *		An alias for the table.
-	 *	@param array $condition
-	 *		An array describing the condition on which to join.
+	 *	@param string $condition
+	 *		An string describing the condition on which to join.
 	 *	@param string $type
 	 *		The type of join (e.x 'INNER', 'LEFT', 'RIGHT', 'FULL'). Default is 
 	 *		'INNER'.
