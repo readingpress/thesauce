@@ -33,6 +33,12 @@ abstract class Query {
 	protected $fields;
 
 	/**
+	 *	@param array $values
+	 *		An array of key => value pairs to insert or update.
+	 */
+	protected $values = array();
+
+	/**
 	 *	@var array $conditions
 	 *		An array of conditions to apply to the query.
 	 */
@@ -44,16 +50,11 @@ abstract class Query {
 	 */
 	protected $params;
 
-	/**
-	 *	@param array $values
-	 *		An array of key => value pairs to insert or update.
-	 */
-	protected $values = array();
-
 	public function __construct($target)	{
 		$this->target = $target;
 		$this->stringBase = NULL;
 		$this->fields = array();
+		$this->values = array();
 		$this->conditions = array();
 		$this->params = array();
 	}
