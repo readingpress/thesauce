@@ -41,7 +41,7 @@ class SelectQuery extends Query {
 	 *	@param array $fields
 	 *		The fields to select.
 	 */
-	public function fields($alias, $fields = array('*'))	{
+	public function addFields($alias, $fields = array('*'))	{
 		foreach ($fields as $name) {
 			$this->fields[] = "$alias.$name";
 		}
