@@ -34,7 +34,7 @@ class SelectQuery extends Query {
 	}
 
 	/**
-	 *	Add fields to the query.
+	 *	Add fields to the select query.
 	 *
 	 *	@param string $alias
 	 *		The alias of the table.
