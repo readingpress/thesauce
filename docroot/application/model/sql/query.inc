@@ -36,7 +36,7 @@ abstract class Query {
 	 *	@param array $values
 	 *		An array of key => value pairs to insert or update.
 	 */
-	protected $values = array();
+	protected $values;
 
 	/**
 	 *	@var array $conditions
