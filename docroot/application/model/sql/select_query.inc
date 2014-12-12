@@ -62,9 +62,12 @@ class SelectQuery extends Query {
 	 *		An alias for the table.
 	 *	@param string $condition
 	 *		A condition on which to join.
+	 *	@param string $type
+	 *		The type of join (e.x 'INNER', 'LEFT', 'RIGHT', 'FULL'). Default is 
+	 *		'INNER'.
 	 */
-	public function join($name, $alias, $condition)	{
-		$this->joins[] = "INNER JOIN $name AS $alias ON $condition";
+	public function join($name, $alias, $condition, $type = 'INNER')	{
+		$this->joins[] = "$type JOIN $name AS $alias ON $condition";
 	}
 
 }
