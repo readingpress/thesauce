@@ -99,6 +99,7 @@ abstract class Query {
 		preg_match_all($regex, $str, $placeholders);
 		// We call end() on $placeholders because this gives us the part of our
 		// regex that is in the parenthesis, i.e. without the leading colon.
+		// @see http://php.net/manual/en/function.preg-match-all.php
 		foreach (end($placeholders) as $ph) {
 			$str = preg_replace("/:$ph/", implode(', ', $this->{$ph}), $str);
 		}
