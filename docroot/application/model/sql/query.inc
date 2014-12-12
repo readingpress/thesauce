@@ -13,30 +13,36 @@
 abstract class Query {
 
 	/**
-	 *	@var string $stringBase.
-	 *		The beginning of the query string, with named placeholders for the
-	 *		dynamic values.
-	 */
-	protected $stringBase = NULL;
-
-	/**
 	 *	@var string $target
 	 *		The name of the table or database on which the operation is being 
 	 *		performed.
 	 */
-	protected $target = NULL;
+	protected $target;
+
+	/**
+	 *	@var string $stringBase.
+	 *		The beginning of the query string, with named placeholders for the
+	 *		dynamic values.
+	 */
+	protected $stringBase;
+
+	/**
+	 *	@var array $fields
+	 *		An array of fields to affect (e.x. SELECT or INSERT INTO).
+	 */
+	protected $fields;
 
 	/**
 	 *	@var array $conditions
 	 *		An array of conditions to apply to the query.
 	 */
-	protected $conditions = array();
+	protected $conditions;
 
 	/**
 	 *	@var array $params
 	 *		The parameters to pass to the query using mysqli_stmt::bind_param().
 	 */
-	protected $params = array();
+	protected $params;
 
 	/**
 	 *	@param array $values
@@ -46,6 +52,10 @@ abstract class Query {
 
 	public function __construct($target)	{
 		$this->target = $target;
+		$this->stringBase = NULL;
+		$this->fields = array();
+		$this->conditions = array();
+		$this->params = array();
 	}
 
 

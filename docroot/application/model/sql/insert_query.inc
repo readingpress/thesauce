@@ -12,15 +12,9 @@
  */
 class InsertQuery extends Query {
 
-	/**
-	 *	@param array $keys
-	 *		An array of fields to insert into.
-	 */
-	protected $keys;
-
 	public function __construct($target)	{
 		parent::__construct($target);
-		$this->stringBase = "INSERT INTO $target (:keys) VALUES (:values)";
+		$this->stringBase = "INSERT INTO $target (:fields) VALUES (:values)";
 	}
 
 	/**
@@ -32,7 +26,7 @@ class InsertQuery extends Query {
 	 */
 	public function values($values)	{
 		parent::values($values);
-		$this->keys = array_keys($values);
+		$this->fields = array_keys($values);
 		// We need to build an array of placeholder question marks matching in 
 		// length with our column names ($keys). That way we can replace them later
 		// with mysqli_stmt::bind_param().

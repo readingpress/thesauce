@@ -15,12 +15,6 @@
 class SelectQuery extends Query {
 
 	/**
-	 *	@var array $fields
-	 *		An array of fields to select.
-	 */
-	protected $fields = array();
-
-	/**
 	 *	@var array $joins
 	 *		An array of joins to apply to the query.
 	 */
@@ -60,8 +54,8 @@ class SelectQuery extends Query {
 	 *		The name of the table to join on.
 	 *	@param string $alias
 	 *		An alias for the table.
-	 *	@param string $condition
-	 *		A condition on which to join.
+	 *	@param array $condition
+	 *		An array describing the condition on which to join.
 	 *	@param string $type
 	 *		The type of join (e.x 'INNER', 'LEFT', 'RIGHT', 'FULL'). Default is 
 	 *		'INNER'.
