@@ -19,13 +19,13 @@ class InsertQuery extends Query {
 
 	/**
 	 *	Add values to to insert.
-	 *	@override Query::values().
+	 *	@override Query::valueMap().
 	 *
 	 *	@param array $values;
 	 *		An array of key => value pairs to insert.
 	 */
-	public function values($values)	{
-		parent::values($values);
+	public function valueMap($values)	{
+		parent::valueMap($values);
 		$this->fields = array_keys($values);
 		// We need to build an array of placeholder question marks matching in 
 		// length with our column names ($keys). That way we can replace them later
