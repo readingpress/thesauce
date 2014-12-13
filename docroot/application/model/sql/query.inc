@@ -10,7 +10,8 @@
  *	@param string $target
  *		The name of the item that is the target of the query.
  */
-abstract class Query {
+abstract class Query 
+{
 
 	/**
 	 *	@var string $target
@@ -51,6 +52,7 @@ abstract class Query {
 	protected $params;
 
 	public function __construct($target)	{
+		TypeValidator::strings('The needs a string to use as its target. In most cases this is a tablename.', $target);
 		$this->target = $target;
 		$this->stringBase = '';
 		$this->fields = array();
@@ -71,6 +73,7 @@ abstract class Query {
 	 *		A comparison operator.
 	 */
 	public function condition($a, $b, $operator)	{
+		TypeValidator::strings('All of the parameters passed to Query::condition must be strings so that the statement can be built.', $a, $b, $operator);
 		$this->conditions[] = "WHERE $a $operator ?";
 		$params[] = $b;
 	}
@@ -82,6 +85,7 @@ abstract class Query {
 	 *		An array of key => value pairs to insert.
 	 */
 	public function valueMap(array $values)	{
+		TypeValidator::arrays('You need to provide an array value map of the form key => value in order to build the query', $values);
 		$this->params += $values;
 	}
 
@@ -105,9 +109,5 @@ abstract class Query {
 		}
 		return $str;
 	}
-
-	/**
-	 *	Verifies that all parameters are a string.
-	 */
 
 }
