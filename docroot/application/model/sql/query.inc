@@ -72,6 +72,17 @@ abstract class Query
 	 *		A comparison operator.
 	 */
 	public function condition($a, $b, $operator)	{
+
+		if (gettype($a) !== 'string') {
+			throw new InvalidArgumentException('The first parameter passed to condition must be a string. This is the left hand side of a SQL WHERE condition, (i.e WHERE param1 = somevalue)');
+		}
+		if (gettype($b) !== 'string') {
+			throw new InvalidArgumentException('The second parameter passed to condition must be a string. This is the right hand side of a SQL WHERE condition, (i.e WHERE somecolumn = param2)');			
+		}
+		if (gettype($operator) !== 'string') {
+			throw new InvalidArgumentException("The third parameter passed to condition must be a string. This is the operator of a SQL WHERE condition, (i.e '=', '>', '<',...)");				
+		}
+
 		$this->conditions[] = "WHERE $a $operator ?";
 		$params[] = $b;
 	}

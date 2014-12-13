@@ -42,6 +42,11 @@ class SelectQuery extends Query {
 	 *		The fields to select.
 	 */
 	public function addFields($alias, array $fields = array('*'))	{
+
+		if (gettype($alias) !== 'string') {
+			throw new InvalidArgumentException('The first parameter to addFields() must be a string. This is a table alias that has wither been defined in the he constructor or by using join().');				
+		}
+
 		foreach ($fields as $name) {
 			$this->fields[] = "$alias.$name";
 		}
@@ -61,6 +66,20 @@ class SelectQuery extends Query {
 	 *		'INNER'.
 	 */
 	public function join($name, $alias, $condition, $type = 'INNER')	{
+
+		if (gettype($name) !== 'string') {
+			throw new InvalidArgumentException('');				
+		}
+		if (gettype($alias) !== 'string') {
+			throw new InvalidArgumentException('');				
+		}
+		if (gettype($condition) !== 'string') {
+			throw new InvalidArgumentException('');				
+		}
+		if (gettype($type) !== 'string') {
+			throw new InvalidArgumentException('');				
+		}
+
 		$this->joins[] = "$type JOIN $name AS $alias ON $condition";
 	}
 
