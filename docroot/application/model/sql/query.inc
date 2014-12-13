@@ -106,4 +106,8 @@ abstract class Query {
 		return $str;
 	}
 
+	/**
+	 *	Verifies that all parameters are a string.
+	 */
+
 }
