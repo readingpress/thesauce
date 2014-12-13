@@ -21,7 +21,6 @@ class SelectQuery extends Query {
 	protected $joins;
 
 	public function __construct($target, $alias)	{
-		TypeValidator::strings('You need to specify an alias for the target table in order to build the query.', $alias);
 		parent::__construct($target);
 		$this->stringBase = "SELECT :fields FROM $target AS $alias :joins :conditions";
 		$this->joins = array();
@@ -43,8 +42,6 @@ class SelectQuery extends Query {
 	 *		The fields to select.
 	 */
 	public function addFields($alias, array $fields = array('*'))	{
-		TypeValidator::strings('You need to specify an alias for the target table in order to add fields.', $alias);
-		TypeValidator::arrays('You need to to provide an array of fields in order to add fields.', $fields);
 		foreach ($fields as $name) {
 			$this->fields[] = "$alias.$name";
 		}
@@ -64,7 +61,6 @@ class SelectQuery extends Query {
 	 *		'INNER'.
 	 */
 	public function join($name, $alias, $condition, $type = 'INNER')	{
-		TypeValidator::strings('SelectQuery::join() needs all of its parameters to be strings in order to construct the query.', $name, $alias, $condition, $type);
 		$this->joins[] = "$type JOIN $name AS $alias ON $condition";
 	}
 

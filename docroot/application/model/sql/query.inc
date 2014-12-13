@@ -52,7 +52,6 @@ abstract class Query
 	protected $params;
 
 	public function __construct($target)	{
-		TypeValidator::strings('The needs a string to use as its target. In most cases this is a tablename.', $target);
 		$this->target = $target;
 		$this->stringBase = '';
 		$this->fields = array();
