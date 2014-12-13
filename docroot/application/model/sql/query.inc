@@ -72,7 +72,6 @@ abstract class Query
 	 *		A comparison operator.
 	 */
 	public function condition($a, $b, $operator)	{
-		TypeValidator::strings('All of the parameters passed to Query::condition must be strings so that the statement can be built.', $a, $b, $operator);
 		$this->conditions[] = "WHERE $a $operator ?";
 		$params[] = $b;
 	}
@@ -84,7 +83,6 @@ abstract class Query
 	 *		An array of key => value pairs to insert.
 	 */
 	public function valueMap(array $values)	{
-		TypeValidator::arrays('You need to provide an array value map of the form key => value in order to build the query', $values);
 		$this->params += $values;
 	}
 
