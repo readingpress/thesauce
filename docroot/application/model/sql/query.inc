@@ -53,7 +53,7 @@ abstract class Query
 
 	public function __construct($target)	{
 
-		if (!is_string($target) || empty($target) || !$this->isClean($target)) {
+		if (!is_string($target) || !$this->isClean($target)) {
 			throw new InvalidArgumentException('Invalid target table or database name.');
 		}
 
@@ -78,6 +78,17 @@ abstract class Query
 	 *		A comparison operator.
 	 */
 	public function condition($a, $b, $operator)	{
+
+		if (!is_string($a) || !$this->isClean($a)) {
+			throw new InvalidArgumentException('Invalid left-hand side in condition.');
+		}
+		if (!is_string($b)) {
+			throw new InvalidArgumentException('Invalid right-hand side in condition.');
+		}
+		if (!in_array($operator, array('=', '<>', '>', '<', '>=', '<=', 'LIKE'))) {
+			throw new InvalidArgumentException('Invalid operator in condition.');
+		}
+
 		$this->conditions[] = "WHERE $a $operator ?";
 		$params[] = $b;
 	}
@@ -123,10 +134,10 @@ abstract class Query
 	 *		TRUE if the schema name is clean, FALSE if not.
 	 */
 	private function isClean($schema_name)	{
-		// Schema names can only contain alphanumeric characters, underscores and 
-		// the $ character. They cannot be all numbers. There may be a dot it there
-		// is a table alias in the string but the dot cannot be the first character.
-		$bad_patterns = '/[^[:alnum:]_\$\.]|^[0-9]+$|^\.|\.$/';
+		// Schema names are not empty, can only contain alphanumeric characters, 
+		// underscores and the $ character and cannot be all numbers. There may be a 
+		// dot in the string but the dot cannot be the first or last character.
+		$bad_patterns = '/^$|^[[:alnum:]_\$\.]$|^[^0-9]+$|^\.|\.$/';
 		return !preg_match($bad_patterns, $schema_name, $placeholders);
 	}
 
