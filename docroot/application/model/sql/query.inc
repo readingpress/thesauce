@@ -75,7 +75,7 @@ abstract class Query implements QueryInterface
 		}
 
 		$this->conditions[] = "WHERE $a $op ?";
-		$params[] = $b;
+		$this->params[] = $b;
 		return $this;
 	}
 

@@ -13,4 +13,8 @@ require_once APP_ROOT . '/application/model/sql/update_query.inc';
 require_once APP_ROOT . '/application/model/sql/delete_query.inc';
 require_once APP_ROOT . '/application/model/sql/query_factory.inc';
 
-$a = QueryFactory::createQuery('select', 'Persons', 'p')->condition('p.LastName', 'DeWolf', '=')->fields('p', array('FirstName', 'LastName'));
+$a = QueryFactory::createQuery('select', 'Persons', 'p')
+			->condition('p.LastName', 'DeWolf', '=')
+			->fields('p', array('FirstName', 'LastName'));
+var_dump($a->getStatement());
+var_dump($a->getParams());
