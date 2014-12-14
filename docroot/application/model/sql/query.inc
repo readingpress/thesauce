@@ -54,7 +54,7 @@ abstract class Query
 	public function __construct($target)	{
 
 		if (!is_string($target) || empty($target) ||  !$this->isClean($target)) {
-			throw new InvalidArgumentException('The target of your query is not valid for a mysql schema object (i.e. a table or database name). It should be a non-empty string containing only alphanumeric characters, underscores, and/or the $ character.');
+			throw new InvalidArgumentException('Invalid target table or database name.');
 		}
 
 		$this->target = $target;
