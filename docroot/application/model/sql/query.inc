@@ -53,7 +53,7 @@ abstract class Query
 
 	public function __construct($target)	{
 
-		if (!is_string($target) || empty($target) ||  !$this->isClean($target)) {
+		if (!is_string($target) || empty($target) || !$this->isClean($target)) {
 			throw new InvalidArgumentException('Invalid target table or database name.');
 		}
 
@@ -70,7 +70,8 @@ abstract class Query
 	 *	Add a condition to the query.
 	 *
 	 *	@param string $a
-	 *		The column name whose value should be checked.
+	 *		The column name which is the left side of the condition. It should be 
+	 *		prefixed with the table alias in the form th.index.
 	 *	@param string $b
 	 *		The second value.
 	 *	@param string $operator
@@ -123,9 +124,10 @@ abstract class Query
 	 */
 	private function isClean($schema_name)	{
 		// Schema names can only contain alphanumeric characters, underscores and 
-		// the $ character.
-		$regex = '/[^[:alnum:]_\$]+|[^0-9]+/';
-		return preg_match($regex, $schema_name, $placeholders);
+		// the $ character. They cannot be all numbers. There may be a dot it there
+		// is a table alias in the string but the dot cannot be the first character.
+		$bad_patterns = '/[^[:alnum:]_\$\.]|^[0-9]+$|^\.|\.$/';
+		return !preg_match($bad_patterns, $schema_name, $placeholders);
 	}
 
 }
