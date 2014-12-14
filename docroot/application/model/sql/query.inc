@@ -53,9 +53,6 @@ abstract class Query implements QueryInterface
 		if (!is_string($target) || empty($target)) {
 			throw new InvalidArgumentException('Invalid target table or database name.');
 		}
-		if (!is_string($alias)) {
-			throw new InvalidArgumentException('Invalid alias for query.');
-		}
 
 		$this->target = $target;
 		$this->stringBase = '';
@@ -67,13 +64,13 @@ abstract class Query implements QueryInterface
 
 	public function condition($a, $b, $op)	{
 
-		if (!is_string($a)) {
+		if (!is_string($a) || empty($a)) {
 			throw new InvalidArgumentException('Invalid left-hand side.');
 		}
-		if (!is_string($b)) {
+		if (!is_string($b) || empty($b)) {
 			throw new InvalidArgumentException('Invalid right-hand side.');
 		}
-		if (!is_string($op)) {
+		if (!is_string($op) || empty($op)) {
 			throw new InvalidArgumentException('Invalid operator.');
 		}
 
@@ -83,7 +80,7 @@ abstract class Query implements QueryInterface
 
 	public function valueMap($values)	{
 
-		if (!is_array($values)) {
+		if (!is_array($values) || empty($values)) {
 			throw new InvalidArgumentException('Invalid values parameter.');
 		}
 
