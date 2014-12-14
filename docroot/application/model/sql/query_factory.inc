@@ -4,7 +4,8 @@
  *	The QueryFactory class.
  */
 
-class QueryFactory {
+class QueryFactory 
+{
 
 	/**
 	 *	Create a query.

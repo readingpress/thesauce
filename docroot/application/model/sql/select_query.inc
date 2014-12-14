@@ -37,7 +37,7 @@ class SelectQuery extends Query implements QueryInterface
 	 *	@param array $fields
 	 *		The fields to select.
 	 */
-	public function addFields($alias, array $fields = array('*'))	{
+	public function addFields($alias, $fields = array('*'))	{
 
 		if (!is_string($alias)) {
 			throw new InvalidArgumentException('Invalid table alias.');
