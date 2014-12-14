@@ -124,7 +124,7 @@ abstract class Query
 	private function isClean($schema_name)	{
 		// Schema names can only contain alphanumeric characters, underscores and 
 		// the $ character.
-		$regex = '/^[[:alnum:]_\$]+$/';
+		$regex = '/[^[:alnum:]_\$]+|[^0-9]+/';
 		return preg_match($regex, $schema_name, $placeholders);
 	}
 
