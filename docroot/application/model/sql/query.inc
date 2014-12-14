@@ -26,7 +26,7 @@ abstract class Query implements QueryInterface
 
 	/**
 	 *	@var array $fields
-	 *		An array of fields to affect (e.x. SELECT or INSERT INTO).
+	 *		An array of fields to target (e.x. SELECT or INSERT INTO).
 	 */
 	protected $fields;
 
@@ -76,15 +76,17 @@ abstract class Query implements QueryInterface
 
 		$this->conditions[] = "WHERE $a $op ?";
 		$params[] = $b;
+		return $this;
 	}
 
-	public function valueMap($values)	{
+	public function values($values)	{
 
 		if (!is_array($values) || empty($values)) {
 			throw new InvalidArgumentException('Invalid values parameter.');
 		}
 
 		$this->params += $values;
+		return $this;
 	}
 
 	public function getStatement()	{

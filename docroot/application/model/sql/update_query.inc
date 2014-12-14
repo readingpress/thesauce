@@ -15,11 +15,12 @@ class UpdateQuery extends Query implements QueryInterface
 		$this->stringBase = "UPDATE $target SET :values :conditions";
 	}
 
-	public function valueMap($values)	{
+	public function values($values)	{
 		parent::valueMap($values);
 		foreach ($values as $key => $value) {
 			$this->values[] = "$key = ?";
 		}
+		return $this;
 	}
 
 }

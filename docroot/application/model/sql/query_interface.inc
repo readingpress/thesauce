@@ -31,6 +31,9 @@ interface QueryInterface
 	 *		The second value.
 	 *	@param string $op
 	 *		A comparison operator.
+	 *
+	 *	@return object
+	 *		The up to date instance of the class that called this method.
 	 */
 	public function condition($a, $b, $op);
 
@@ -39,8 +42,11 @@ interface QueryInterface
 	 *
 	 *	@param array $values;
 	 *		An array of key => value pairs to insert.
+	 *
+	 *	@return object
+	 *		The up to date instance of the class that called this method.
 	 */
-	public function valueMap($values);
+	public function values($values);
 
 	/**
 	 *	Get the query statement.

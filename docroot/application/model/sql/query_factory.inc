@@ -24,15 +24,15 @@ class QueryFactory
 	 */
 	public static function createQuery($type, $target, $alias = '')	{
 
-		if (!is_string($type) || !in_array($type, array('create', 'retrieve', 'update', 'delete'))) {
+		if (!is_string($type) || !in_array($type, array('insert', 'select', 'update', 'delete'))) {
 			throw new InvalidArgumentException('Invalid query type.');
 		}
 
 		switch ($type) {
-			case 'create':
+			case 'insert':
 				return new InsertQuery($target, $alias);
 				break;
-			case 'retrieve':
+			case 'select':
 				return new SelectQuery($target, $alias);
 				break;
 			case 'update':

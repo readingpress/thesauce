@@ -45,9 +45,13 @@ class SelectQuery extends Query implements QueryInterface
 
 	/**
 	 *	Make the select query a count query.
+	 *
+	 *	@return object
+	 *		The up to date instance of the class that called this method.
 	 */
 	public function count()	{
 		$this->stringBase = preg_replace('/:fields/', 'count(*)', $this->stringBase);
+		return $this;
 	}
 
 	/**
@@ -57,8 +61,11 @@ class SelectQuery extends Query implements QueryInterface
 	 *		The alias of the table.
 	 *	@param array $fields
 	 *		The fields to select.
+	 *
+	 *	@return object
+	 *		The up to date instance of the class that called this method.
 	 */
-	public function addFields($alias, $fields = array('*'))	{
+	public function fields($alias, $fields = array('*'))	{
 
 		if (!is_string($alias) || empty($alias)) {
 			throw new InvalidArgumentException('Invalid table alias.');
@@ -70,6 +77,7 @@ class SelectQuery extends Query implements QueryInterface
 		foreach ($fields as $name) {
 			$this->fields[] = "$alias.$name";
 		}
+		return $this;
 	}
 
 	/**
@@ -84,6 +92,9 @@ class SelectQuery extends Query implements QueryInterface
 	 *	@param string $type
 	 *		The type of join (e.x 'INNER', 'LEFT', 'RIGHT', 'FULL'). Default is 
 	 *		'INNER'.
+	 *
+	 *	@return object
+	 *		The up to date instance of the class that called this method.
 	 */
 	public function join($name, $alias, $condition, $type = 'INNER')	{
 
@@ -101,6 +112,7 @@ class SelectQuery extends Query implements QueryInterface
 		}
 
 		$this->joins[] = "$type JOIN $name AS $alias ON $condition";
+		return $this;
 	}
 
 	/**
@@ -110,9 +122,13 @@ class SelectQuery extends Query implements QueryInterface
 	 *		A column to order the results on.
 	 *	@param string $order
 	 *		Whether to order the results ASC or DESC. Default is DESC.
+	 *
+	 *	@return object
+	 *		The up to date instance of the class that called this method.
 	 */
 	public function order($name, $order = 'DESC')	{
 		$this->order = array("ORDER BY $name $order");
+		return $this;
 	}
 
 
@@ -121,9 +137,13 @@ class SelectQuery extends Query implements QueryInterface
 	 *
 	 *	@param string $limit
 	 *		The limit to apply (e.x LIMIT $limit).
+	 *
+	 *	@return object
+	 *		The up to date instance of the class that called this method.
 	 */
 	public function limit($limit)	{
 		$this->limit = array("LIMIT $limit");
+		return $this;
 	}
 
 }
