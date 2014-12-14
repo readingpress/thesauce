@@ -17,6 +17,11 @@ class SelectQuery extends Query implements QueryInterface
 	protected $joins;
 
 	public function __construct($target, $alias = '')	{
+
+		if (!is_string($alias) || !$this->isClean($alias)) {
+			throw new InvalidArgumentException('Invalid alias.');
+		}
+
 		parent::__construct($target);
 		$this->stringBase = "SELECT :fields FROM $target AS $alias :joins :conditions";
 		$this->joins = array();
