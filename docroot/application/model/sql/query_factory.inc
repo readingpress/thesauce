@@ -27,12 +27,6 @@ class QueryFactory
 		if (!is_string($type) || !in_array($type, array('create', 'retrieve', 'update', 'delete'))) {
 			throw new InvalidArgumentException('Invalid query type.');
 		}
-		if (!is_string($target) || empty($target)) {
-			throw new InvalidArgumentException('Invalid target for query.');
-		}
-		if (!is_string($alias)) {
-			throw new InvalidArgumentException('Invalid alias for query.');
-		}
 
 		switch ($type) {
 			case 'create':
