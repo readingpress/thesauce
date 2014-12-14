@@ -39,7 +39,7 @@ class SelectQuery extends Query implements QueryInterface
 	 */
 	public function addFields($alias, $fields = array('*'))	{
 
-		if (!is_string($alias)) {
+		if (!is_string($alias) || empty($alias)) {
 			throw new InvalidArgumentException('Invalid table alias.');
 		}
 		if (!is_array($fields) || empty($fields)) {
@@ -65,6 +65,20 @@ class SelectQuery extends Query implements QueryInterface
 	 *		'INNER'.
 	 */
 	public function join($name, $alias, $condition, $type = 'INNER')	{
+
+		if (!is_string($name) || empty($name)) {
+			throw new InvalidArgumentException('Invalid tablename.');
+		}
+		if (!is_string($alias) || empty($alias)) {
+			throw new InvalidArgumentException('Invalid alias.');
+		}
+		if (!is_string($condition) || empty($condition)) {
+			throw new InvalidArgumentException('Invalid condition.');
+		}
+		if (!is_string($type) || empty($type)) {
+			throw new InvalidArgumentException('Invalid alias.');
+		}
+
 		$this->joins[] = "$type JOIN $name AS $alias ON $condition";
 	}
 
