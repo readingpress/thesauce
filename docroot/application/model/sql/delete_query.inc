@@ -5,7 +5,7 @@
  */
 
 /**
- *	An Update query.
+ *	A DELETE query.
  */
 class DeleteQuery extends Query implements QueryInterface 
 {

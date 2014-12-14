@@ -5,7 +5,7 @@
  */
 
 /**
- *	An Update query.
+ *	An UPDATE query.
  */
 class UpdateQuery extends Query implements QueryInterface 
 {
