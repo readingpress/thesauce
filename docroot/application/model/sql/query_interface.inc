@@ -26,7 +26,7 @@ interface QueryInterface
 	 *
 	 *	@param string $a
 	 *		The column name which is the left side of the condition. It should be 
-	 *		prefixed with the table alias in the form th.index.
+	 *		prefixed with the table alias in the form alias.index.
 	 *	@param string $b
 	 *		The second value.
 	 *	@param string $op

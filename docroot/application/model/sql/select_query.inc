@@ -28,7 +28,7 @@ class SelectQuery extends Query implements QueryInterface
 	}
 
 	/**
-	 *	Make the query a count query.
+	 *	Make the select query a count query.
 	 */
 	public function count()	{
 		$this->stringBase = preg_replace('/:fields/', 'count(*)', $this->stringBase);
