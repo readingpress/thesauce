@@ -29,10 +29,10 @@ interface QueryInterface
 	 *		prefixed with the table alias in the form th.index.
 	 *	@param string $b
 	 *		The second value.
-	 *	@param string $operator
+	 *	@param string $op
 	 *		A comparison operator.
 	 */
-	public function condition($a, $b, $operator);
+	public function condition($a, $b, $op);
 
 	/**
 	 *	Add values to to insert or update.

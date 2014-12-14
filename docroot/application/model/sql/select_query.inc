@@ -18,11 +18,6 @@ class SelectQuery extends Query implements QueryInterface
 
 	public function __construct($target, $alias = '')	{
 		parent::__construct($target);
-
-		if (!$this->isClean($alias)) {
-			throw new InvalidArgumentException('Invalid alias.');
-		}
-
 		$this->stringBase = "SELECT :fields FROM $target AS $alias :joins :conditions";
 		$this->joins = array();
 	}
@@ -70,14 +65,6 @@ class SelectQuery extends Query implements QueryInterface
 	 *		'INNER'.
 	 */
 	public function join($name, $alias, $condition, $type = 'INNER')	{
-
-		if (!is_string($name) || !$this->isClean($name)) {
-
-		}
-		if (!in_array($type, array('INNER', 'LEFT', 'RIGHT', 'FULL'))) {
-
-		}
-
 		$this->joins[] = "$type JOIN $name AS $alias ON $condition";
 	}
 

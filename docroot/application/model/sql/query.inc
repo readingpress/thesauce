@@ -50,7 +50,7 @@ abstract class Query implements QueryInterface
 
 	public function __construct($target, $alias = '')	{
 
-		if (!is_string($target) || !$this->isClean($target)) {
+		if (!is_string($target) || empty($target)) {
 			throw new InvalidArgumentException('Invalid target table or database name.');
 		}
 		if (!is_string($alias)) {
@@ -65,25 +65,25 @@ abstract class Query implements QueryInterface
 		$this->params = array();
 	}
 
-	public function condition($a, $b, $operator)	{
+	public function condition($a, $b, $op)	{
 
-		if (!is_string($a) || !$this->isClean($a)) {
+		if (!is_string($a)) {
 			throw new InvalidArgumentException('Invalid left-hand side.');
 		}
 		if (!is_string($b)) {
 			throw new InvalidArgumentException('Invalid right-hand side.');
 		}
-		if (!in_array($operator, array('=', '<>', '>', '<', '>=', '<=', 'BETWEEN', 'LIKE', 'IN'))) {
+		if (!is_string($op)) {
 			throw new InvalidArgumentException('Invalid operator.');
 		}
 
-		$this->conditions[] = "WHERE $a $operator ?";
+		$this->conditions[] = "WHERE $a $op ?";
 		$params[] = $b;
 	}
 
 	public function valueMap($values)	{
 
-		if (!is_array($values) || !$this->isClean(array_keys($values))) {
+		if (!is_array($values)) {
 			throw new InvalidArgumentException('Invalid values parameter.');
 		}
 
@@ -107,28 +107,6 @@ abstract class Query implements QueryInterface
 
 	public function getParams()	{
 		return $this->params;
-	}
-
-	/**
-	 *	Checks a string for characters that are not allowed in schema names.
-	 *
-	 *	@param mixed $schema_name
-	 *		The schema name string to check, or an array of schema names to check.
-	 *
-	 *	@return boolean
-	 *		TRUE if the schema name is clean, FALSE if not.
-	 */
-	private function isClean($schema_name)	{
-		// Schema names are not empty, can only contain alphanumeric characters, 
-		// underscores and the $ character and cannot be all numbers. There may be a 
-		// dot in the string but the dot cannot be the first or last character.
-		$bad_patterns = '/^$|^[[:alnum:]_\$\.]$|^[^0-9]+$|^\.|\.$/';
-		foreach ((array) $schema_name as $name) {
-			if (preg_match($bad_patterns, $schema_name, $placeholders)) {
-				return FALSE;
-			}
-		}
-		return TRUE;
 	}
 
 }
