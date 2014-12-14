@@ -16,6 +16,20 @@ class SelectQuery extends Query implements QueryInterface
 	 */
 	protected $joins;
 
+	/**
+	 *	@var array $order
+	 *		Order conditions to apply to the query. Only an array b/c of convenience
+	 *		in logic that constructs the prepared query. There is only ever one.
+	 */
+	protected $order;
+
+	/**
+	 *	@var array $limit
+	 *		Limit conditions to apply to the query. Only an array b/c of convenience
+	 *		in logic that constructs the prepared query. There is only ever one.
+	 */
+	protected $limit;
+
 	public function __construct($target, $alias = '')	{
 
 		if (!is_string($alias) || empty($alias)) {
@@ -25,6 +39,8 @@ class SelectQuery extends Query implements QueryInterface
 		parent::__construct($target);
 		$this->stringBase = "SELECT :fields FROM $target AS $alias :joins :conditions";
 		$this->joins = array();
+		$this->order = array();
+		$this->limit = array();
 	}
 
 	/**
@@ -85,6 +101,29 @@ class SelectQuery extends Query implements QueryInterface
 		}
 
 		$this->joins[] = "$type JOIN $name AS $alias ON $condition";
+	}
+
+	/**
+	 *	Add an order by clause to the query.
+	 *
+	 *	@param string $name
+	 *		A column to order the results on.
+	 *	@param string $order
+	 *		Whether to order the results ASC or DESC. Default is DESC.
+	 */
+	public function order($name, $order = 'DESC')	{
+		$this->order = array("ORDER BY $name $order");
+	}
+
+
+	/**
+	 *	Add a limit clause to the query.
+	 *
+	 *	@param string $limit
+	 *		The limit to apply (e.x LIMIT $limit).
+	 */
+	public function limit($limit)	{
+		$this->limit = array("LIMIT $limit");
 	}
 
 }
