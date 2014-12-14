@@ -6,11 +6,8 @@
 
 /**
  *	The abstract query object.
- *
- *	@param string $target
- *		The name of the item that is the target of the query.
  */
-abstract class Query 
+abstract class Query implements QueryInterface
 {
 
 	/**
@@ -51,7 +48,7 @@ abstract class Query
 	 */
 	protected $params;
 
-	public function __construct($target)	{
+	public function __construct($target, $alias = '')	{
 
 		if (!is_string($target) || !$this->isClean($target)) {
 			throw new InvalidArgumentException('Invalid target table or database name.');
@@ -65,44 +62,26 @@ abstract class Query
 		$this->params = array();
 	}
 
-
-	/**
-	 *	Add a condition to the query.
-	 *
-	 *	@param string $a
-	 *		The column name which is the left side of the condition. It should be 
-	 *		prefixed with the table alias in the form th.index.
-	 *	@param string $b
-	 *		The second value.
-	 *	@param string $operator
-	 *		A comparison operator.
-	 */
 	public function condition($a, $b, $operator)	{
 
 		if (!is_string($a) || !$this->isClean($a)) {
-			throw new InvalidArgumentException('Invalid left-hand side in condition.');
+			throw new InvalidArgumentException('Invalid left-hand side.');
 		}
 		if (!is_string($b)) {
-			throw new InvalidArgumentException('Invalid right-hand side in condition.');
+			throw new InvalidArgumentException('Invalid right-hand side.');
 		}
-		if (!in_array($operator, array('=', '<>', '>', '<', '>=', '<=', 'LIKE'))) {
-			throw new InvalidArgumentException('Invalid operator in condition.');
+		if (!in_array($operator, array('=', '<>', '>', '<', '>=', '<=', 'BETWEEN', 'LIKE', 'IN'))) {
+			throw new InvalidArgumentException('Invalid operator.');
 		}
 
 		$this->conditions[] = "WHERE $a $operator ?";
 		$params[] = $b;
 	}
 
-	/**
-	 *	Add values to to insert or update.
-	 *
-	 *	@param array $values;
-	 *		An array of key => value pairs to insert.
-	 */
 	public function valueMap($values)	{
 
 		if (!is_array($values) || !$this->isClean(array_keys($values))) {
-			throw new InvalidArgumentException("Invalid values parameter.", 1);
+			throw new InvalidArgumentException('Invalid values parameter.');
 		}
 
 		$this->params += $values;
@@ -139,14 +118,11 @@ abstract class Query
 	 *		TRUE if the schema name is clean, FALSE if not.
 	 */
 	private function isClean($schema_name)	{
-		if (is_string($schema_name)) {
-			$schema_name = array($schema_name);
-		}
 		// Schema names are not empty, can only contain alphanumeric characters, 
 		// underscores and the $ character and cannot be all numbers. There may be a 
 		// dot in the string but the dot cannot be the first or last character.
 		$bad_patterns = '/^$|^[[:alnum:]_\$\.]$|^[^0-9]+$|^\.|\.$/';
-		foreach ($schema_name as $name) {
+		foreach ((array) $schema_name as $name) {
 			if (preg_match($bad_patterns, $schema_name, $placeholders)) {
 				return FALSE;
 			}

@@ -6,25 +6,16 @@
 
 /**
  *	An INSERT query.
- *
- *	@param string $target
- *		The table to select.
  */
-class InsertQuery extends Query {
+class InsertQuery extends Query implements QueryInterface 
+{
 
-	public function __construct($target)	{
+	public function __construct($target, $alias = '')	{
 		parent::__construct($target);
 		$this->stringBase = "INSERT INTO $target (:fields) VALUES (:values)";
 	}
 
-	/**
-	 *	Add values to to insert.
-	 *	@override Query::valueMap().
-	 *
-	 *	@param array $values;
-	 *		An array of key => value pairs to insert.
-	 */
-	public function valueMap(array $values)	{
+	public function valueMap($values)	{
 		parent::valueMap($values);
 		$this->fields = array_keys($values);
 		// We need to build an array of placeholder question marks matching in 

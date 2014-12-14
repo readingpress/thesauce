@@ -6,13 +6,11 @@
 
 /**
  *	An Update query.
- *
- *	@param string $target
- *		The table to select.
  */
-class DeleteQuery extends Query {
+class DeleteQuery extends Query implements QueryInterface 
+{
 
-	public function __construct($target)	{
+	public function __construct($target, $alias = '')	{
 		parent::__construct($target);
 		$this->stringBase = "DELETE FROM $target :conditions";
 	}

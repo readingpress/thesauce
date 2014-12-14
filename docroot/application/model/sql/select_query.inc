@@ -6,13 +6,9 @@
 
 /**
  *	A SELECT query.
- *
- *	@param string $target
- *		The table to select.
- *	@param string $alias
- *		An alias to give to $target.
  */
-class SelectQuery extends Query {
+class SelectQuery extends Query implements QueryInterface 
+{
 
 	/**
 	 *	@var array $joins
@@ -20,7 +16,7 @@ class SelectQuery extends Query {
 	 */
 	protected $joins;
 
-	public function __construct($target, $alias)	{
+	public function __construct($target, $alias = '')	{
 		parent::__construct($target);
 		$this->stringBase = "SELECT :fields FROM $target AS $alias :joins :conditions";
 		$this->joins = array();
@@ -42,6 +38,14 @@ class SelectQuery extends Query {
 	 *		The fields to select.
 	 */
 	public function addFields($alias, array $fields = array('*'))	{
+
+		if (!is_string($alias)) {
+			throw new InvalidArgumentException('Invalid table alias.');
+		}
+		if (!is_array($fields) || empty($fields)) {
+			throw new InvalidArgumentException('Invalid fields list.');
+		}
+
 		foreach ($fields as $name) {
 			$this->fields[] = "$alias.$name";
 		}
@@ -61,6 +65,14 @@ class SelectQuery extends Query {
 	 *		'INNER'.
 	 */
 	public function join($name, $alias, $condition, $type = 'INNER')	{
+
+		if (!is_string($name) || !$this->isClean($name)) {
+
+		}
+		if (!in_array($type, array('INNER', 'LEFT', 'RIGHT', 'FULL'))) {
+
+		}
+
 		$this->joins[] = "$type JOIN $name AS $alias ON $condition";
 	}
 

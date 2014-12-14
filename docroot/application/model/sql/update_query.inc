@@ -6,25 +6,16 @@
 
 /**
  *	An Update query.
- *
- *	@param string $target
- *		The table to select.
  */
-class UpdateQuery extends Query {
+class UpdateQuery extends Query implements QueryInterface 
+{
 
-	public function __construct($target)	{
+	public function __construct($target, $alias = '')	{
 		parent::__construct($target);
 		$this->stringBase = "UPDATE $target SET :values :conditions";
 	}
 
-	/**
-	 *	Add values to to insert.
-	 *	@override Query::values().
-	 *
-	 *	@param array $values;
-	 *		An array of key => value pairs to insert.
-	 */
-	public function valueMap(array $values)	{
+	public function valueMap($values)	{
 		parent::valueMap($values);
 		foreach ($values as $key => $value) {
 			$this->values[] = "$key = ?";
