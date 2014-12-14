@@ -90,13 +90,7 @@ abstract class Query implements QueryInterface
 		$this->params += $values;
 	}
 
-	/**
-	 *	Return the query as a string.
-	 *
-	 *	@return string
-	 *		The query string.
-	 */
-	public function toString()	{
+	public function getStatement()	{
 		$str = $this->stringBase;
 		// Placeholders are always a string of alphanumeric characters and 
 		// underscores that ends in a space and begins with a colon (e.x. ':type').
@@ -109,6 +103,10 @@ abstract class Query implements QueryInterface
 			$str = preg_replace("/:$ph/", implode(', ', $this->{$ph}), $str);
 		}
 		return $str;
+	}
+
+	public function getParams()	{
+		return $this->params;
 	}
 
 	/**
