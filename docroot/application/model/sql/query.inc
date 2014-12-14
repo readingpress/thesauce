@@ -99,7 +99,12 @@ abstract class Query
 	 *	@param array $values;
 	 *		An array of key => value pairs to insert.
 	 */
-	public function valueMap(array $values)	{
+	public function valueMap($values)	{
+
+		if (!is_array($values) || !$this->isClean(array_keys($values))) {
+			throw new InvalidArgumentException("Invalid values parameter.", 1);
+		}
+
 		$this->params += $values;
 	}
 
@@ -125,20 +130,28 @@ abstract class Query
 	}
 
 	/**
-	 *	Checks a string for characters that are not allodwe in schema names.
+	 *	Checks a string for characters that are not allowed in schema names.
 	 *
-	 *	@param string $schema_name
-	 *		The schema name string to check.
+	 *	@param mixed $schema_name
+	 *		The schema name string to check, or an array of schema names to check.
 	 *
 	 *	@return boolean
 	 *		TRUE if the schema name is clean, FALSE if not.
 	 */
 	private function isClean($schema_name)	{
+		if (is_string($schema_name)) {
+			$schema_name = array($schema_name);
+		}
 		// Schema names are not empty, can only contain alphanumeric characters, 
 		// underscores and the $ character and cannot be all numbers. There may be a 
 		// dot in the string but the dot cannot be the first or last character.
 		$bad_patterns = '/^$|^[[:alnum:]_\$\.]$|^[^0-9]+$|^\.|\.$/';
-		return !preg_match($bad_patterns, $schema_name, $placeholders);
+		foreach ($schema_name as $name) {
+			if (preg_match($bad_patterns, $schema_name, $placeholders)) {
+				return FALSE;
+			}
+		}
+		return TRUE;
 	}
 
 }
