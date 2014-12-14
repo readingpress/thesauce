@@ -53,6 +53,9 @@ abstract class Query implements QueryInterface
 		if (!is_string($target) || !$this->isClean($target)) {
 			throw new InvalidArgumentException('Invalid target table or database name.');
 		}
+		if (!is_string($alias)) {
+			throw new InvalidArgumentException('Invalid alias for query.');
+		}
 
 		$this->target = $target;
 		$this->stringBase = '';
