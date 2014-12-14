@@ -23,6 +23,11 @@ class QueryFactory
 	 *		An instantiated query object for the requested operation.
 	 */
 	public static function createQuery($type, $target, $alias = '')	{
+
+		if (!is_string($type) || !in_array($type, array('create', 'retrieve', 'update', 'delete'))) {
+			throw new InvalidArgumentException('Invalid query type.');
+		}
+
 		switch ($type) {
 			case 'create':
 				return new InsertQuery($target, $alias);
