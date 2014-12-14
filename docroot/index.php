@@ -20,5 +20,5 @@ try {
 	require_once APP_ROOT . '/application/bootstrap.php';
 }
 catch(Exception $e)	{
-	print $e->getMessage();
+	print 'Whoops! ' . $e->getMessage();
 }

@@ -52,6 +52,11 @@ abstract class Query
 	protected $params;
 
 	public function __construct($target)	{
+
+		if (!is_string($target) || empty($target) ||  !$this->isClean($target)) {
+			throw new InvalidArgumentException('The target of your query is not valid for a mysql schema object (i.e. a table or database name). It should be a non-empty string containing only alphanumeric characters, underscores, and/or the $ character.');
+		}
+
 		$this->target = $target;
 		$this->stringBase = '';
 		$this->fields = array();
@@ -65,7 +70,7 @@ abstract class Query
 	 *	Add a condition to the query.
 	 *
 	 *	@param string $a
-	 *		The first value.
+	 *		The column name whose value should be checked.
 	 *	@param string $b
 	 *		The second value.
 	 *	@param string $operator
@@ -105,6 +110,22 @@ abstract class Query
 			$str = preg_replace("/:$ph/", implode(', ', $this->{$ph}), $str);
 		}
 		return $str;
+	}
+
+	/**
+	 *	Checks a string for characters that are not allodwe in schema names.
+	 *
+	 *	@param string $schema_name
+	 *		The schema name string to check.
+	 *
+	 *	@return boolean
+	 *		TRUE if the schema name is clean, FALSE if not.
+	 */
+	private function isClean($schema_name)	{
+		// Schema names can only contain alphanumeric characters, underscores and 
+		// the $ character.
+		$regex = '/^[[:alnum:]_\$]+$/';
+		return preg_match($regex, $schema_name, $placeholders);
 	}
 
 }
