@@ -19,7 +19,7 @@ require_once APP_ROOT . '/application/model/sql/query_factory.inc';
 // @TODO
 //  Add alias regex input validation to params which require an alias prefix.
 //  Fix condition which breaks with more than one condition. Allow both AND and OR.
-//  Devise a way to include CREATE/DROP DATABASE and CREATE/DROP TABLE.
+//  Check to see if LIMIT and ORDER BY should be using palceholders.
 
 $a = QueryFactory::createQuery('select', 'Persons', 'p')
 			->fields('p')

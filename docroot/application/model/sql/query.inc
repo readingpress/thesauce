@@ -90,6 +90,28 @@ abstract class Query extends DatabaseConnection implements QueryInterface
 		return $this;
 	}
 
+	/**
+	 *	Executes the query against the database.
+	 *
+	 *	@return object
+	 *
+	 */
+	public function execute()	{
+		$stmt = $this->prepare($this->getStatement());
+		// The first parameter to bind_param are single chacacters indicating var
+		// type.
+		$params = array(str_repeat('s', count($this->params)));
+		// In order to use call_user_func_array, all of our parameters must be 
+		// passed as references within the local scope of this function.
+		// @see http://php.net/manual/en/mysqli-stmt.bind-param.php
+		foreach ($this->params as $key => $value) {
+			$params[] = &$value;
+		}
+		call_user_func_array(array($stmt, 'bind_param'), $params);
+		$stmt->execute();
+		$result = $stmt->get_result();
+	}
+
 	private function getStatement()	{
 		$str = $this->stringBase;
 		// Placeholders are always a string of alphanumeric characters and 
