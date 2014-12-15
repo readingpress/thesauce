@@ -37,6 +37,12 @@ abstract class Query extends DatabaseConnection implements QueryInterface
 	protected $values;
 
 	/**
+	 *	@var array $joins
+	 *		An array of joins to apply to the query.
+	 */
+	protected $joins;
+
+	/**
 	 *	@var array $conditions
 	 *		An array of conditions to apply to the query.
 	 */
@@ -59,6 +65,7 @@ abstract class Query extends DatabaseConnection implements QueryInterface
 		$this->stringBase = '';
 		$this->fields = array();
 		$this->values = array();
+		$this->joins = array();
 		$this->conditions = array();
 		$this->params = array();
 	}

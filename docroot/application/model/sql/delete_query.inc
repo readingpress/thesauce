@@ -12,7 +12,7 @@ class DeleteQuery extends DatabaseQuery implements QueryInterface
 
 	public function __construct($target, $alias = '')	{
 		parent::__construct($target);
-		$this->stringBase = "DELETE FROM $target :conditions";
+		$this->stringBase = "DELETE FROM $target :joins :conditions";
 	}
 
 }

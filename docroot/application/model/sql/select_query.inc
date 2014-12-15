@@ -11,12 +11,6 @@ class SelectQuery extends DatabaseQuery implements QueryInterface
 {
 
 	/**
-	 *	@var array $joins
-	 *		An array of joins to apply to the query.
-	 */
-	protected $joins;
-
-	/**
 	 *	@var array $order
 	 *		Order conditions to apply to the query. Only an array b/c of convenience
 	 *		in logic that constructs the prepared query. There is only ever one.
@@ -38,7 +32,6 @@ class SelectQuery extends DatabaseQuery implements QueryInterface
 
 		parent::__construct($target);
 		$this->stringBase = "SELECT :fields FROM $target AS $alias :joins :conditions";
-		$this->joins = array();
 		$this->order = array();
 		$this->limit = array();
 	}

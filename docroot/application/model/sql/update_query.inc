@@ -12,7 +12,7 @@ class UpdateQuery extends DatabaseQuery implements QueryInterface
 
 	public function __construct($target, $alias = '')	{
 		parent::__construct($target);
-		$this->stringBase = "UPDATE $target SET :values :conditions";
+		$this->stringBase = "UPDATE $target SET :values :joins :conditions";
 	}
 
 	public function values($values)	{
