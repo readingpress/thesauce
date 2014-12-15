@@ -23,7 +23,9 @@ require_once APP_ROOT . '/application/model/sql/query_factory.inc';
 //  Look into Alias mess and see if there is a better way then including it in the
 //  interface constructor only so select queries can use it.
 //	Namespace and code polish entire SQL model according to best practices.
-//	Full code review.
+//  Change filenames, classnames, and/or var names in accordance with best practices.
+//	Full code review, comment cleanup etc.
+//  Q/A all factory methods.
 //
 // @TODO Other
 //	Fix server config to use sed on www.conf and php.ini rather than overwriting the files
