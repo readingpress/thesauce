@@ -9,7 +9,7 @@ apt-get update
 export DEBIAN_FRONTEND=noninteractive
 apt-get install mysql-server nginx php5-fpm -y
 # Install PHP extensions.
-apt-get install php5-mysql -y
+apt-get install php5-mysqlnd -y
 echo 'LEMP stack installed'
 
 echo 'Configure LEMP settings'

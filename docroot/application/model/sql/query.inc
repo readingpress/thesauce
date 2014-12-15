@@ -110,6 +110,7 @@ abstract class Query extends DatabaseConnection implements QueryInterface
 		call_user_func_array(array($stmt, 'bind_param'), $params);
 		$stmt->execute();
 		$result = $stmt->get_result();
+		var_dump($result->fetch_array(MYSQLI_ASSOC));
 	}
 
 	private function getStatement()	{
