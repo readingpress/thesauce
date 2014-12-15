@@ -97,12 +97,6 @@ abstract class Query extends DatabaseConnection implements QueryInterface
 		return $this;
 	}
 
-	/**
-	 *	Executes the query against the database.
-	 *
-	 *	@return object
-	 *
-	 */
 	public function execute()	{
 		$stmt = $this->prepare($this->getStatement());
 		// The first parameter to bind_param are single chacacters indicating var

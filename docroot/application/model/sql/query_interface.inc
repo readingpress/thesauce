@@ -66,11 +66,11 @@ interface QueryInterface
 	 */
 	public function join($name, $alias, $condition, $type = 'INNER');
 
-/**
+	/**
 	 *	Executes the query against the database.
 	 *
-	 *	@return mysqli_result
-	 *		A mysqli_result object for this query.
+	 *	@return object
+	 *		A mysqli_result object.
 	 */
 	public function execute();
 	
