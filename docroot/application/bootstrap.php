@@ -23,6 +23,8 @@ require_once APP_ROOT . '/application/model/sql/query_factory.inc';
 //  Look into Alias mess and see if there is a better way then including it in the
 //  interface constructor only so select queries can use it.
 //	Namespace and code polish entire SQL model according to best practices.
+//  Review afresh whether we are missing any validation functions or have
+//  unneccesary ones.
 //  Change filenames, classnames, and/or var names in accordance with best practices.
 //	Full code review, comment cleanup etc.
 //  Q/A all factory methods.
