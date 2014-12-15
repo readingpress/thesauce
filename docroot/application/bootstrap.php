@@ -16,9 +16,13 @@ require_once APP_ROOT . '/application/model/sql/update_query.inc';
 require_once APP_ROOT . '/application/model/sql/delete_query.inc';
 require_once APP_ROOT . '/application/model/sql/query_factory.inc';
 
-// @TODO
+// @TODO SQL Model
 //  Add alias regex input validation to params which require an alias prefix.
 //  Fix condition which breaks with more than one condition. Allow both AND and OR.
 //  Check to see if LIMIT and ORDER BY should be using palceholders.
-// Fix server config to use sed on www.conf and php.ini rather than overwriting the files
-// for forward compatibility with updates.
+//	Namespace and code polish entire SQL model according to best practices.
+//	Full code review.
+//
+// @TODO Other
+//	Fix server config to use sed on www.conf and php.ini rather than overwriting the files
+//	for forward compatibility with updates.
