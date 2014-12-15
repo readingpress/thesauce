@@ -27,7 +27,7 @@ class SelectQuery extends DatabaseQuery implements QueryInterface
 	public function __construct($target, $alias = '')	{
 
 		if (!is_string($alias) || empty($alias)) {
-			throw new InvalidArgumentException('Invalid alias for query.');
+			throw new InvalidArgumentException('Invalid alias for select query.');
 		}
 
 		parent::__construct($target);
