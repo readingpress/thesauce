@@ -16,7 +16,7 @@ class UpdateQuery extends Query implements QueryInterface
 	}
 
 	public function values($values)	{
-		parent::valueMap($values);
+		parent::values($values);
 		foreach ($values as $key => $value) {
 			$this->values[] = "$key = ?";
 		}

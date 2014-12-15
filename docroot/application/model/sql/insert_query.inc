@@ -16,7 +16,7 @@ class InsertQuery extends Query implements QueryInterface
 	}
 
 	public function values($values)	{
-		parent::valueMap($values);
+		parent::values($values);
 		$this->fields = array_keys($values);
 		// We need to build an array of placeholder question marks matching in 
 		// length with our column names ($keys). That way we can replace them later
