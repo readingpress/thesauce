@@ -7,7 +7,7 @@
 /**
  *	A DROP query.
  */
-class DropQuery extends Query implements QueryInterface
+class DropQuery extends DatabaseQuery implements QueryInterface
 {
 	
 	public function __construct($target, $alias = '')	{

@@ -7,7 +7,7 @@
 /**
  *	A SELECT query.
  */
-class SelectQuery extends Query implements QueryInterface 
+class SelectQuery extends DatabaseQuery implements QueryInterface 
 {
 
 	/**

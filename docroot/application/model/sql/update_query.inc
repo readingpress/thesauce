@@ -7,7 +7,7 @@
 /**
  *	An UPDATE query.
  */
-class UpdateQuery extends Query implements QueryInterface 
+class UpdateQuery extends DatabaseQuery implements QueryInterface 
 {
 
 	public function __construct($target, $alias = '')	{

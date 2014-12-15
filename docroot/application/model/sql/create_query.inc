@@ -6,7 +6,7 @@
 /**
  *	A CREATE query.
  */
-class CreateQuery extends Query implements QueryInterface 
+class CreateQuery extends DatabaseQuery implements QueryInterface 
 {
 
 	public function __construct($target, $alias = '')	{

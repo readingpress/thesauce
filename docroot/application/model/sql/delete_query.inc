@@ -7,7 +7,7 @@
 /**
  *	A DELETE query.
  */
-class DeleteQuery extends Query implements QueryInterface 
+class DeleteQuery extends DatabaseQuery implements QueryInterface 
 {
 
 	public function __construct($target, $alias = '')	{

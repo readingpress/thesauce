@@ -7,7 +7,7 @@
 /**
  *	An INSERT query.
  */
-class InsertQuery extends Query implements QueryInterface 
+class InsertQuery extends DatabaseQuery implements QueryInterface 
 {
 
 	public function __construct($target, $alias = '')	{
