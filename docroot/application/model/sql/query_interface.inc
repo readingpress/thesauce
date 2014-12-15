@@ -49,19 +49,8 @@ interface QueryInterface
 	public function values($values);
 
 	/**
-	 *	Get the query statement.
-	 *
-	 *	@return string
-	 *		The query string.
+	 *	Executes the query against the database.
 	 */
-	public function getStatement();
-
-	/**
-	 *	Gets the values for the placeholders in the statement.
-	 *
-	 *	@return array
-	 *		An array of values for the placeholders in the statement.
-	 */
-	public function getParams();
+	public function execute();
 	
 }

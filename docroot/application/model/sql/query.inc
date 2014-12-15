@@ -7,7 +7,7 @@
 /**
  *	The abstract query object.
  */
-abstract class Query implements QueryInterface
+abstract class Query extends DatabaseConnection implements QueryInterface
 {
 
 	/**
@@ -54,6 +54,7 @@ abstract class Query implements QueryInterface
 			throw new InvalidArgumentException('Invalid target table or database name.');
 		}
 
+		parent::__construct();
 		$this->target = $target;
 		$this->stringBase = '';
 		$this->fields = array();
@@ -89,7 +90,7 @@ abstract class Query implements QueryInterface
 		return $this;
 	}
 
-	public function getStatement()	{
+	private function getStatement()	{
 		$str = $this->stringBase;
 		// Placeholders are always a string of alphanumeric characters and 
 		// underscores that ends in a space and begins with a colon (e.x. ':type').
@@ -102,10 +103,6 @@ abstract class Query implements QueryInterface
 			$str = preg_replace("/:$ph/", implode(', ', $this->{$ph}), $str);
 		}
 		return $str;
-	}
-
-	public function getParams()	{
-		return $this->params;
 	}
 
 }
