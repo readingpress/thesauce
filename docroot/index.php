@@ -2,14 +2,14 @@
 /**
  *	@file
  *	Handles all incoming http requests that are not for a file in a public 
- *	directory or a public directory itself..
+ *	directory or a public directory itself.
  */
 
+// Turn on errors and wrap all code in a try/catch block.
+// @TODO Remove both before launching.
+ini_set('display_errors',1);  
+error_reporting(E_ALL);
 try {
-	// Turn on errors.
-	// @TODO Remove before launching.
-	ini_set('display_errors',1);  
-	error_reporting(E_ALL);
 
 	/**
 	 * Root directory of the application.
