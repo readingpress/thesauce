@@ -48,6 +48,24 @@ interface QueryInterface
 	 */
 	public function values($values);
 
+	/**
+	 *	Join on a table.
+	 *
+	 *	@param string $name
+	 *		The name of the table to join on.
+	 *	@param string $alias
+	 *		An alias for the table.
+	 *	@param string $condition
+	 *		An string describing the condition on which to join.
+	 *	@param string $type
+	 *		The type of join (e.x 'INNER', 'LEFT', 'RIGHT', 'FULL'). Default is 
+	 *		'INNER'.
+	 *
+	 *	@return object
+	 *		The up to date instance of the class that called this method.
+	 */
+	public function join($name, $alias, $condition, $type = 'INNER');
+
 /**
 	 *	Executes the query against the database.
 	 *

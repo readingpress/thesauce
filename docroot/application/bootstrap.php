@@ -21,9 +21,6 @@ require_once APP_ROOT . '/application/model/sql/query_factory.inc';
 //  Fix condition which breaks with more than one condition. Allow both AND and OR.
 //  Check to see if LIMIT and ORDER BY should be using palceholders.
 
-$result = QueryFactory::createQuery('select', 'Persons', 'p')
-			->fields('p')
-			->condition('p.LastName', 'Curlin', '=')
+$result = QueryFactory::deleteQuery('Persons')
+			->condition('LastName', 'Mckinney', '=')
 			->execute();
-print '<pre>';
-var_dump($result->fetch_assoc());

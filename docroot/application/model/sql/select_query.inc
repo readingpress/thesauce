@@ -81,41 +81,6 @@ class SelectQuery extends DatabaseQuery implements QueryInterface
 	}
 
 	/**
-	 *	Join on a table.
-	 *
-	 *	@param string $name
-	 *		The name of the table to join on.
-	 *	@param string $alias
-	 *		An alias for the table.
-	 *	@param string $condition
-	 *		An string describing the condition on which to join.
-	 *	@param string $type
-	 *		The type of join (e.x 'INNER', 'LEFT', 'RIGHT', 'FULL'). Default is 
-	 *		'INNER'.
-	 *
-	 *	@return object
-	 *		The up to date instance of the class that called this method.
-	 */
-	public function join($name, $alias, $condition, $type = 'INNER')	{
-
-		if (!is_string($name) || empty($name)) {
-			throw new InvalidArgumentException('Invalid tablename.');
-		}
-		if (!is_string($alias) || empty($alias)) {
-			throw new InvalidArgumentException('Invalid alias.');
-		}
-		if (!is_string($condition) || empty($condition)) {
-			throw new InvalidArgumentException('Invalid condition.');
-		}
-		if (!is_string($type) || empty($type)) {
-			throw new InvalidArgumentException('Invalid alias.');
-		}
-
-		$this->joins[] = "$type JOIN $name AS $alias ON $condition";
-		return $this;
-	}
-
-	/**
 	 *	Add an order by clause to the query.
 	 *
 	 *	@param string $name

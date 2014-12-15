@@ -8,39 +8,86 @@ class QueryFactory
 {
 
 	/**
-	 *	Create a query.
+	 *	Create a CREATE query.
 	 *
-	 *	@param string $type
-	 *		The type of query to instantiate. Possible values include 'create', 
-	 *		'retrieve', 'update' and 'delete').
 	 *	@param string $target
-	 *		The target table name or database name of the query.
+	 *		What to create. Either TABLE or DATABASE;
 	 *	@param string $alias
-	 *		An alias for the table if this is a select query. Defaults to a empty 
-	 *		string.
+	 *		The name to give to what is being created (i.e the name of the table or 
+	 *		database).
 	 *
 	 *	@return object
-	 *		An instantiated query object for the requested operation.
+	 *		A CreateQuery object.
 	 */
-	public static function createQuery($type, $target, $alias = '')	{
-
-		if (!is_string($type) || !in_array($type, array('insert', 'select', 'update', 'delete'))) {
-			throw new InvalidArgumentException('Invalid query type.');
-		}
-
-		switch ($type) {
-			case 'insert':
-				return new InsertQuery($target, $alias);
-				break;
-			case 'select':
-				return new SelectQuery($target, $alias);
-				break;
-			case 'update':
-				return new UpdateQuery($target, $alias);
-				break;
-			case 'delete':
-				return new DeleteQuery($target, $alias);
-				break;
-		}
+	public static function createQuery($target, $alias)	{
+		return new CreateQuery($target, $alias);
 	}
+
+	/**
+	 *	Create a DROP query.
+	 *
+	 *	@param string $target
+	 *		What to drop. Either TABLE or DATABASE;
+	 *
+	 *	@return object
+	 *		A CreateQuery object.
+	 */
+	public static function dropQuery($target)	{
+		return new DropQuery($target);
+	}
+
+	/**
+	 *	Create an INSERT query.
+	 *
+	 *	@param string $target
+	 *		The tablename to insert into.
+	 *
+	 *	@return object
+	 *		An InsertQuery object.
+	 */
+	public static function insertQuery($target)	{
+		return new InsertQuery($target);
+	}
+
+	/**
+	 *	Create a SELECT query.
+	 *
+	 *	@param string $target
+	 *		The tablename to start the select query from.
+	 *	@param string $alias
+	 *		An alias for the target table.
+	 *
+	 *	@return object
+	 *		A SelectQuery object.
+	 */
+	public static function selectQuery($target, $alias)	{
+		return new SelectQuery($target, $alias);
+	}
+
+	/**
+	 *	Create an UPDATE query.
+	 *
+	 *	@param string $target
+	 *		The tablename to update.
+	 *
+	 *	@return object
+	 *		An UpdateQuery object.
+	 */
+	public static function updateQuery($target)	{
+		return new UpdateQuery($target);
+	}
+
+	/**
+	 *	Create a DELETE query.
+	 *
+	 *	@param string $target
+	 *		The tablename to delete from.
+	 *
+	 *	@return object
+	 *		A DeleteQuery object.
+	 */
+	public static function deleteQuery($target)	{
+		return new DeleteQuery($target);
+	}
+
 }
